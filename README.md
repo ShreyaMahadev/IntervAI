@@ -1,5 +1,5 @@
 <div align="center">
-  <h3 align="center">IntervAI: A job interview preparation platform powered by Vapi AI Voice agents</h3>
+  <h1 align="center">IntervAI: A job interview preparation platform powered by Vapi AI Voice agents</h1>
 </div>
 
 ## <a name="introduction">🤖 Introduction</a>
