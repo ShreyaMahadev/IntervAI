@@ -1,13 +1,11 @@
-// Import the functions you need from the SDKs you need
-import { getApp, getApps, initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+//Does majorly 4 tasks.
+// 1. Import the functions you need from the Firebase SDKs
+import { getApp, getApps, initializeApp } from "firebase/app"; //firebase/app: for Core Firebase functions.
+import { getAuth } from "firebase/auth"; //firebase/auth: For authentication (login, signup, etc.).
+import { getFirestore } from "firebase/firestore"; //firebase/firestore: For Firestore (Firebase's NoSQL database)
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+//2. Defining firebase configuration using environment variables
+//This object contains keys and IDs required to connect your app to your Firebase project.
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -18,9 +16,11 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
+//3. Initialize Firebase
+//ensures Firebase is only initialized once, even during hot reloads in development.
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-// const analytics = getAnalytics(app);
+// getApps() checks if an instance already exists.If not, initializeApp(firebaseConfig) creates one.
 
+//4. Exporting Firebase services
 export const auth = getAuth(app);
 export const db = getFirestore(app);

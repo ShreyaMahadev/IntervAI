@@ -9,7 +9,7 @@ import { vapi } from "@/lib/vapi.sdk";
 import { interviewer } from "@/constants";
 import { createFeedback } from "@/lib/actions/general.action";
 
-enum CallStatus {
+enum CallStatus { // labels to track what stage the call is in.
   INACTIVE = "INACTIVE",
   CONNECTING = "CONNECTING",
   ACTIVE = "ACTIVE",
@@ -17,8 +17,8 @@ enum CallStatus {
 }
 
 interface SavedMessage {
-  role: "user" | "system" | "assistant";
-  content: string;
+  role: "user" | "system" | "assistant"; //who said the message
+  content: string; // the content of the message
 }
 
 const Agent = ({
@@ -30,12 +30,13 @@ const Agent = ({
   questions,
 }: AgentProps) => {
   const router = useRouter();
-  const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
-  const [messages, setMessages] = useState<SavedMessage[]>([]);
+  const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE); //Tracks whether the call is not started, in progress, or ended.
+  const [messages, setMessages] = useState<SavedMessage[]>([]); //Keeps a list of everything said during the call (transcript)
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [lastMessage, setLastMessage] = useState<string>("");
+  const [lastMessage, setLastMessage] = useState<string>(""); //Stores the latest message to display on screen
 
   useEffect(() => {
+    // Set up event listeners for the VAPI client
     const onCallStart = () => {
       setCallStatus(CallStatus.ACTIVE);
     };
